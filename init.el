@@ -55,14 +55,7 @@
 ;; Enable column number on the bottom bar
 (setq column-number-mode t)
 
-;; Start of installing packages
-(straight-use-package 'use-package)
-
-(use-package gruber-darker-theme
-  :straight t
-  :config
-  (load-theme 'gruber-darker t))
-
+;; Custom function that duplicates the current line under the cursor
 (defun duplicate-line ()
   "Duplicate current line"
   (interactive)
@@ -76,3 +69,46 @@
     (foward-char column)))
 
 (global-set-key (kbd "C-,") 'duplicate-line)
+
+;; Start of installing packages
+(straight-use-package 'use-package)
+
+;; Dark theme
+(use-package gruber-darker-theme
+  :straight t
+  :config
+  (load-theme 'gruber-darker t))
+
+;; RFC
+(use-package rfc-mode
+  :straight t
+  :config
+  (setq rfc-mode-directory (expand-file-name "~/rfc/"))
+  :bind
+  ("C-c r" . rfc-mode-browse))
+
+;; Highlight keywords used in comments
+(use-package hl-todo
+  :straight t
+  :config
+  (setq hl-todo-keyword-faces
+        '(("TODO"  . "#ff0000")
+          ("DEBUG" . "#1e90ff")))
+  :hook (prog-mode-hook . hl-todo-mode))
+
+;; Rainbow mode
+;; Add colors to curly brackets
+(use-package rainbow-mode
+  :straight t
+  :config
+  (setq rainbow-ansi-colors nil)
+  (setq rainbow-x-colors nil))
+
+;; Search engine
+(use-package ido
+  :straight t
+  :config
+  (ido-mode t)
+  :bind
+  ("C-S-n" . ido-next-match)
+  ("C-S-p" . ido-prev-match))
