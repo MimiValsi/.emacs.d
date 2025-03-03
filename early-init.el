@@ -9,9 +9,9 @@
 ;;  a hook to measure Emacs startup time.
 ;; The default is 800KB. Mesured in bytes.
 ;; GC off during init. (focus all memory on init)
-(setq gc-cons-threshold (*50 1000 1000)
-      gc-cons-percentage 0.6
-      gc-cons-threshold 100000000)
+(setq gc-cons-threshold (* 50 1000 1000)
+      gc-cons-percentage 0.6)
+
 
 ;; Ignore X resources. It's settings would be redundant with the other
 ;;  settings in this file and can conflict with later config
