@@ -112,3 +112,20 @@
   :bind
   ("C-S-n" . ido-next-match)
   ("C-S-p" . ido-prev-match))
+
+;; Multiple-cursos
+;; TODO Change keybindings for moonlander kbd
+(use-package multiple-cursors
+  :straight t
+  :bind
+  ("C-S-c C-S-c" . 'mc/edit-line)
+  ("C->" . 'mc/mark-next-like-this)
+  ("C-<" . 'mc/mark-previous-like-this)
+  ("C-c C-<" . 'mc/mark-all-like-this))
+
+(use-package magit
+  :straight t
+  :config
+  (setq magit-log-margin '(t "%F %R" magit-log-margin-width t 18))
+  :bind
+  ("C-c g" . magit-status))
