@@ -16,3 +16,10 @@
 
 (setq custom-file '"~/.emacs.d/custom.el")
 (load-file custom-file)
+
+(straight-use-package 'use-package)
+
+(use-package gruber-darker-theme
+  :straight t
+  :config
+  (load-theme 'gruber-darker t))
