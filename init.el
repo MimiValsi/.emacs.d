@@ -19,6 +19,24 @@
 
 (set-frame-font "FiraCode Nerd Font Mono 16" nil t)
 
+(global-set-key (kbd "C-;") 'execute-extended-command)
+(global-set-key (kbd "C-h") 'backward-char)
+(global-set-key (kbd "C-j") 'next-line)
+(global-set-key (kbd "C-k") 'previous-line)
+(global-set-key (kbd "C-l") 'forward-char)
+(global-set-key (kbd "C-p") 'recenter-top-bottom)
+(global-set-key (kbd "C-f") 'forward-word)
+(global-set-key (kbd "C-b") 'backward-word)
+(global-set-key (kbd "C-n") 'scroll-up-command)
+(global-set-key (kbd "C-u") 'scroll-down-command)
+(global-set-key (kbd "C-v") 'kill-line)
+
+
+
+;; Activate auto close parents
+(electric-pair-mode t)
+
+;; Start of installing packages
 (straight-use-package 'use-package)
 
 (use-package gruber-darker-theme
