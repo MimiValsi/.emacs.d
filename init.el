@@ -31,10 +31,29 @@
 (global-set-key (kbd "C-u") 'scroll-down-command)
 (global-set-key (kbd "C-v") 'kill-line)
 
-
-
 ;; Activate auto close parents
 (electric-pair-mode t)
+
+;; Display relative column numbers on the left
+(setq display-line-numbers 'relative)
+
+;; Remove tool/menu/scroll bars
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; Max column indication
+(setq-default fill-column 80)
+(global-display-fill-column-indicator-mode)
+
+;; Shortcut to avoid yes or no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; remove tabs indent
+(setq-default indent-tabs-mode nil)
+
+;; Enable column number on the bottom bar
+(setq column-number-mode t)
 
 ;; Start of installing packages
 (straight-use-package 'use-package)
@@ -57,4 +76,3 @@
     (foward-char column)))
 
 (global-set-key (kbd "C-,") 'duplicate-line)
-    
