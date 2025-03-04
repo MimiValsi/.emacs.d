@@ -130,3 +130,79 @@
   (setq magit-log-margin '(t "%F %R" magit-log-margin-width t 18))
   :bind
   ("C-c g" . magit-status))
+
+ ;; ---------- Open GNUS (email) ----------
+ (global-set-key (kbd "C-c m") 'gnus)
+
+ (setq gnus-use-full-window nil)
+ (setq gnus-summary-line-format
+       (concat "%U%R %~(max-right 17)~(pad-right 17)&user-date;  "
+               "%~(max-right 20)~(pad-right 20)f %B%s\n"))
+
+ (setq gnus-user-date-format-alist '((t . "%d.%m.%Y %H:%M"))
+       gnus-sum-thread-tree-false-root ""
+       gnus-sum-thread-tree-indent " "
+       gnus-sum-thread-tree-root ""
+       gnus-sum-thread-tree-leaf-with-other "├─≻"
+       gnus-sum-thread-tree-single-leaf     "└─≻"
+       gnus-sum-thread-tree-vertical        "│")
+
+ (setq gnus-summary-thread-gathering-function
+       'gnus-gather-threads-by-subject)
+
+ (setq gnus-thread-sort-functions
+       '(gnus-thread-sort-by-number
+         gnus-thread-sort-by-total-score))
+
+(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+
+(setq user-mail-address "miguel@dasilvaf.net")
+(setq user-full-name "Miguel Da Silva Ferreira")
+(setq message-kill-buffer-on-exit t)
+
+;; Config and receive emails
+(setq gnus-select-method
+        '(nnimap "miguel@dasilvaf.net"
+                (nnimap-address "mail1.netim.hosting")
+                (nnimap-server-port 993)
+                (nnimap-stream ssl)
+                (nnir-search-engine imap)
+                (nnimap-inbox "Inbox")
+                (nnmail-expiry-target
+                 "nnimap+foo:Trash")
+                (nnmail-expiry-wait immediate)))
+
+;; Send emails
+(setq smtpmail-smtp-server "mail1.netim.hosting")
+(setq smtpmail-stream-type 'starttls)
+(setq smtpmail-smtp-service 465)
+(setq smtpmail-retries 7)
+(setq smtpmail-queue-mail nil)
+(setq send-mail-function 'smtpmail-send-it)
+(setq message-send-mail-function 'smtpmail-send-it)
+
+;; TODO Figure out why Gnus doesn't recognize the signature section!
+;; Signature
+;;(setq gnus-posting-styles
+;;      '((".*"
+;;         (address "Miguel Da Silva Ferreira <miguel@dasilvaf.net>")
+;;         (signature
+;;          "Miguel Da Silva Ferreira")
+;;         ("X-Message-SMTP-Method"
+;;          "smtp mail1.netim.hosting 465 miguel@dasilvaf.net"))))
+
+;; Contacts
+(use-package bbdb
+  :straight t
+  :init
+  (bbdb-initialize 'gnus)
+  (bbdb-initialize 'message)
+  :config
+  (setq bbdb-offer-save 1) ; save without asking
+  (setq bbdb-use-pop-up t) ; allow popups for addresses
+  (setq bbdb-electric-p t) ; be disposable with SPC
+  (setq bbdb-popup-target-lines 1) ; very small popup
+  (setq bbdb-dwim-net-address-allow-redundancy t) ; always use full name
+  (setq bbdb-quiet-about-name-mismatches 2) ; show name-mismacthes 2 secs
+  (setq bbdb-always-add-address t)
+  (setq bbdb-file "~/.bbdb"))
