@@ -192,17 +192,21 @@
 ;;          "smtp mail1.netim.hosting 465 miguel@dasilvaf.net"))))
 
 ;; Contacts
-(use-package bbdb
-  :straight t
-  :init
-  (bbdb-initialize 'gnus)
-  (bbdb-initialize 'message)
-  :config
-  (setq bbdb-offer-save 1) ; save without asking
-  (setq bbdb-use-pop-up t) ; allow popups for addresses
-  (setq bbdb-electric-p t) ; be disposable with SPC
-  (setq bbdb-popup-target-lines 1) ; very small popup
-  (setq bbdb-dwim-net-address-allow-redundancy t) ; always use full name
-  (setq bbdb-quiet-about-name-mismatches 2) ; show name-mismacthes 2 secs
-  (setq bbdb-always-add-address t)
-  (setq bbdb-file "~/.bbdb"))
+;;(use-package bbdb
+;;  :straight t
+;;  :init
+;;  (bbdb-initialize 'gnus)
+;;  (bbdb-initialize 'message)
+;;  :config
+;;  (setq bbdb-offer-save 1) ; save without asking
+;;  (setq bbdb-use-pop-up t) ; allow popups for addresses
+;;  (setq bbdb-electric-p t) ; be disposable with SPC
+;;  (setq bbdb-popup-target-lines 1) ; very small popup
+;;  (setq bbdb-dwim-net-address-allow-redundancy t) ; always use full name
+;;  (setq bbdb-quiet-about-name-mismatches 2) ; show name-mismacthes 2 secs
+;;  (setq bbdb-always-add-address t)
+;;  (setq bbdb-file "~/.bbdb"))
+
+;; Package to read EPUB
+(use-package nov
+  :straight t)
