@@ -107,7 +107,7 @@
 ;; Search engine
 (use-package ido
   :straight t
-  :config
+  :init
   (ido-mode t)
   :bind
   ("C-S-n" . ido-next-match)
