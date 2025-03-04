@@ -29,13 +29,14 @@
 (global-set-key (kbd "C-b") 'backward-word)
 (global-set-key (kbd "C-n") 'scroll-up-command)
 (global-set-key (kbd "C-u") 'scroll-down-command)
-(global-set-key (kbd "C-v") 'kill-line)
+(global-set-key (kbd "C-d") 'kill-line)
+(global-set-key (kbd "C-v") 'delete-char)
 
 ;; Activate auto close parents
 (electric-pair-mode t)
 
 ;; Display relative column numbers on the left
-(setq display-line-numbers 'relative)
+(global-display-line-numbers-mode)
 
 ;; Remove tool/menu/scroll bars
 (tool-bar-mode -1)
