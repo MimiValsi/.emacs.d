@@ -74,6 +74,12 @@
 ;; Start of installing packages
 (straight-use-package 'use-package)
 
+(use-package eglot
+  :straight t
+  :defer t
+  :hook
+  (go-mode . eglot-ensure))
+
 ;; Dark theme
 (use-package gruber-darker-theme
   :straight t
@@ -210,3 +216,12 @@
 ;; Package to read EPUB
 (use-package nov
   :straight t)
+
+;; Simpc-mode from Tsoding
+
+;; Adding `/path/to/simpc` to load-path so `require` can find it
+(add-to-list 'load-path "~/.emacs.d/custom_packages/simpc-mode")
+;; Importing simpc-mode
+(require 'simpc-mode)
+;; Automatically enabling simpc-mode on files with extensions like .h, .c, .cpp, .hpp
+(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
