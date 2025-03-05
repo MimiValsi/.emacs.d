@@ -14,9 +14,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(setq custom-file '"~/.emacs.d/custom.el")
-(load-file custom-file)
-
+;; Set font style and size
 (set-frame-font "FiraCode Nerd Font Mono 16" nil t)
 
 (global-set-key (kbd "C-;") 'execute-extended-command)
@@ -31,6 +29,11 @@
 (global-set-key (kbd "C-u") 'scroll-down-command)
 (global-set-key (kbd "C-d") 'kill-line)
 (global-set-key (kbd "C-v") 'delete-char)
+(global-set-key (kbd "C-'") 'dired)
+(global-set-key (kbd "C-:") 'restart-emacs)
+(global-set-key (kbd "M-]") 'forward-paragraph)
+(global-set-key (kbd "M-[") 'backward-paragraph)
+(global-set-key (kbd "M-l") 'goto-line)
 
 ;; Activate auto close parents
 (electric-pair-mode t)
@@ -75,10 +78,11 @@
 (straight-use-package 'use-package)
 
 (use-package eglot
+  :straight t)
+
+(use-package go-mode
   :straight t
-  :defer t
-  :hook
-  (go-mode . eglot-ensure))
+  :hook (go-mode . eglot-ensure))
 
 ;; Dark theme
 (use-package gruber-darker-theme
