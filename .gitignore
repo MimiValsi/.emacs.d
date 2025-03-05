@@ -2,3 +2,9 @@
 eln-cache/
 elpa/
 straight/
+.mc-lists.el
+eshell/
+ido.last
+nov-places
+transient/
+custom_packages/archives/
