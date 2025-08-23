@@ -34,6 +34,7 @@
 (global-set-key (kbd "M-]") 'forward-paragraph)
 (global-set-key (kbd "M-[") 'backward-paragraph)
 (global-set-key (kbd "M-l") 'goto-line)
+(global-set-key (kbd "C-c C-c") 'compile)
 
 ;; Activate auto close parents
 (electric-pair-mode t)
@@ -77,8 +78,8 @@
 ;; Start of installing packages
 (straight-use-package 'use-package)
 
-(use-package eglot
-  :straight t)
+;;(use-package eglot
+;;  :straight t)
 
 (use-package go-mode
   :straight t
@@ -89,6 +90,14 @@
   :straight t
   :config
   (load-theme 'gruber-darker t))
+
+(use-package yasnippet
+  :straight t)
+
+(use-package company
+  :straight t
+  :hook
+  (after-init-hook . global-company-mode))
 
 ;; RFC
 (use-package rfc-mode
@@ -183,6 +192,7 @@
                 (nnmail-expiry-wait immediate)))
 
 ;; Send emails
+(setq smtpmail-default-smtp-server "mail1.netim.hosting")
 (setq smtpmail-smtp-server "mail1.netim.hosting")
 (setq smtpmail-stream-type 'starttls)
 (setq smtpmail-smtp-service 465)
@@ -191,31 +201,29 @@
 (setq send-mail-function 'smtpmail-send-it)
 (setq message-send-mail-function 'smtpmail-send-it)
 
-;; TODO Figure out why Gnus doesn't recognize the signature section!
-;; Signature
-;;(setq gnus-posting-styles
-;;      '((".*"
-;;         (address "Miguel Da Silva Ferreira <miguel@dasilvaf.net>")
-;;         (signature
-;;          "Miguel Da Silva Ferreira")
-;;         ("X-Message-SMTP-Method"
-;;          "smtp mail1.netim.hosting 465 miguel@dasilvaf.net"))))
+(setq gnus-posting-styles
+      '((".*"
+         (address "Miguel Da Silva Ferreira <miguel@dasilvaf.net>")
+         (signature
+          "Miguel Da Silva Ferreira")
+         ("X-Message-SMTP-Method"
+          "smtp mail1.netim.hosting 465 miguel@dasilvaf.net"))))
 
 ;; Contacts
-;;(use-package bbdb
-;;  :straight t
-;;  :init
-;;  (bbdb-initialize 'gnus)
-;;  (bbdb-initialize 'message)
-;;  :config
-;;  (setq bbdb-offer-save 1) ; save without asking
-;;  (setq bbdb-use-pop-up t) ; allow popups for addresses
-;;  (setq bbdb-electric-p t) ; be disposable with SPC
-;;  (setq bbdb-popup-target-lines 1) ; very small popup
-;;  (setq bbdb-dwim-net-address-allow-redundancy t) ; always use full name
-;;  (setq bbdb-quiet-about-name-mismatches 2) ; show name-mismacthes 2 secs
-;;  (setq bbdb-always-add-address t)
-;;  (setq bbdb-file "~/.bbdb"))
+(use-package bbdb
+  :straight t
+  :init
+  (bbdb-initialize 'gnus)
+  (bbdb-initialize 'message)
+  :config
+  (setq bbdb-offer-save 1) ; save without asking
+  (setq bbdb-use-pop-up t) ; allow popups for addresses
+  (setq bbdb-electric-p t) ; be disposable with SPC
+  (setq bbdb-popup-target-lines 1) ; very small popup
+  (setq bbdb-dwim-net-address-allow-redundancy t) ; always use full name
+  (setq bbdb-quiet-about-name-mismatches 2) ; show name-mismacthes 2 secs
+  (setq bbdb-always-add-address t)
+  (setq bbdb-file "~/.bbdb"))
 
 ;; Package to read EPUB
 (use-package nov
@@ -229,3 +237,18 @@
 (require 'simpc-mode)
 ;; Automatically enabling simpc-mode on files with extensions like .h, .c, .cpp, .hpp
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+
+;; erlang
+(add-to-list 'load-path "~/programs/otp-28.0.2/lib/erlang/lib/tools-4.1.2/emacs")
+(setq erlang-root-dir "~/programs/otp-28.0.2")
+(add-to-list 'exec-path "~/programs/otp-28.0.2/bin")
+(require 'erlang-start)
+
+;; yasnippet
+;;(add-to-list 'load-path "~/.emacs.d/custom_packages/yasnippet")
+;;(require 'yasnippet)
+;;(yas-global-mode 1)
+
+;;(eval-after-load 'python
+;;  (progn
+;;    (define-key python-mode-map (kbd "C-c C-c") nil)))
