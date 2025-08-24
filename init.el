@@ -15,7 +15,7 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; Set font style and size
-(set-frame-font "FiraCode Nerd Font Mono 16" nil t)
+(set-frame-font "Berkeley Mono 16" nil t)
 
 (global-set-key (kbd "C-;") 'execute-extended-command)
 (global-set-key (kbd "C-h") 'backward-char)
@@ -35,6 +35,8 @@
 (global-set-key (kbd "M-[") 'backward-paragraph)
 (global-set-key (kbd "M-l") 'goto-line)
 (global-set-key (kbd "C-c C-c") 'compile)
+
+(setq visible-bell 1)
 
 ;; Activate auto close parents
 (electric-pair-mode t)
@@ -239,16 +241,21 @@
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 
 ;; erlang
-(add-to-list 'load-path "~/programs/otp-28.0.2/lib/erlang/lib/tools-4.1.2/emacs")
-(setq erlang-root-dir "~/programs/otp-28.0.2")
-(add-to-list 'exec-path "~/programs/otp-28.0.2/bin")
-(require 'erlang-start)
+;; (add-to-list 'load-path "~/programs/otp-28.0.2/lib/erlang/lib/tools-4.1.2/emacs")
+;; (setq erlang-root-dir "~/programs/otp-28.0.2")
+;; (add-to-list 'exec-path "~/programs/otp-28.0.2/bin")
+;; (require 'erlang-start)
 
 ;; yasnippet
 ;;(add-to-list 'load-path "~/.emacs.d/custom_packages/yasnippet")
 ;;(require 'yasnippet)
 ;;(yas-global-mode 1)
 
+(with-eval-after-load 'python
+  (define-key python-mode-map (kbd "C-c C-c") 'compile)
+  (define-key python-mode-map (kbd "C-c C-l") 'python-shell-send-buffer))
+
+
 ;;(eval-after-load 'python
 ;;  (progn
-;;    (define-key python-mode-map (kbd "C-c C-c") nil)))
+;;    (define-key python-mode-map (kbd "C-c C-c") 'undefined)))
